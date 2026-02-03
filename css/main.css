@@ -1,1 +1,66 @@
-css/main.css
+body { margin:0; font-family:Arial; }
+
+/* BOOK INTRO */
+.intro {
+  background:#020617; height:100vh;
+  display:flex; justify-content:center; align-items:center;
+}
+.book { width:300px;height:400px;perspective:1200px;cursor:pointer; }
+.cover {
+  width:50%;height:100%;background:#111827;
+  position:absolute;top:0;transition:1.2s;
+}
+.left { left:0; transform-origin:left; }
+.right { right:0; transform-origin:right; }
+.book.open .left { transform:rotateY(-180deg); }
+.book.open .right { transform:rotateY(180deg); }
+.book-title {
+  position:absolute; inset:0; display:flex;
+  justify-content:center; align-items:center;
+  color:#38bdf8; font-weight:bold; text-align:center;
+}
+
+/* HEADER */
+.topbar {
+  background:#0b3c5d;color:white;
+  display:flex;align-items:center;padding:12px;
+}
+.logo { height:50px;margin-right:10px; }
+.lang-toggle button { margin-left:5px; }
+
+/* HERO PARALLAX */
+.hero {
+  background:url("../school.jpg") center/cover fixed;
+  height:70vh; display:flex;
+  justify-content:center; align-items:center;
+  position:relative;
+}
+.hero-content {
+  background:rgba(0,0,0,.6);
+  padding:40px;color:white;text-align:center;
+  border-radius:10px; z-index:2;
+}
+.watermark {
+  position:absolute;width:300px;opacity:.08;
+}
+
+/* FADE */
+.fade { opacity:0; transform:translateY(20px);
+  animation:fadeUp 1.2s ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity:1; transform:none; }
+}
+
+.btn {
+  background:#ffcc00;color:black;
+  padding:12px 30px;border-radius:25px;
+  text-decoration:none;font-weight:bold;
+}
+
+/* INFO */
+.info { display:flex; justify-content:space-around; padding:40px; }
+.card { background:white;padding:20px;border-radius:10px;width:30%; }
+
+/* FOOTER */
+footer { background:#0b3c5d;color:white;text-align:center;padding:20px; }
