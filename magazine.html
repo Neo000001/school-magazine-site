@@ -1,21 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>School Magazine</title>
+  <title>Digital Magazine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/flipbook.css">
+  <style>
+    body {
+      margin:0;
+      background:#020617;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+    #book {
+      width:90vw;
+      height:90vh;
+    }
+  </style>
 </head>
 <body>
 
-<div class="controls">
-  <button onclick="prevPage()">◀</button>
-  <span id="pageNo">1</span>
-  <button onclick="nextPage()">▶</button>
-</div>
+<div id="book"></div>
 
-<div class="flipbook" id="flipbook"></div>
-<audio id="flipSound" src="assets/flip.mp3"></audio>
+<!-- REAL FLIP ENGINE -->
+<script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
 
-<script src="js/flipbook.js"></script>
+<script>
+const pageFlip = new St.PageFlip(
+  document.getElementById("book"),
+  {
+    width: 600,
+    height: 800,
+    size: "stretch",
+    showCover: true,
+    maxShadowOpacity: 0.6,
+    mobileScrollSupport: true
+  }
+);
+
+pageFlip.loadFromImages([
+  "pages/page1.jpg",
+  "pages/page2.jpg",
+  "pages/page3.jpg",
+  "pages/page4.jpg",
+  "pages/page5.jpg"
+  // keep adding till last page
+]);
+</script>
+
 </body>
 </html>
