@@ -4,4 +4,3 @@ function openBook() {
     window.location.href = "home.html";
   }, 1200);
 }
-
