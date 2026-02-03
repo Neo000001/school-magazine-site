@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jawahar Navodaya Vidyalaya Kollam</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<header class="topbar">
+  <img src="logo.png" class="logo">
+  <div>
+    <h2>Jawahar Navodaya Vidyalaya</h2>
+    <p>Kollam, Kerala</p>
+  </div>
+  <div class="lang-toggle">
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('ml')">ML</button>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="assets/emblem.png" class="watermark">
+  <div class="hero-content">
+    <h1 id="title" class="fade">Annual School Magazine 2024</h1>
+    <p id="tagline" class="fade" style="animation-delay:.4s">
+      Celebrating knowledge, creativity & unity
+    </p>
+    <a href="magazine.html" class="btn">📖 View Digital Magazine</a>
+  </div>
+</section>
+
+<footer>
+  Jawahar Navodaya Vidyalaya, Kollam  
+  <br>© 2024 · Designed by Eebii
+</footer>
+
+<script>
+const content = {
+  en: {
+    title: "Annual School Magazine 2024",
+    tagline: "Celebrating knowledge, creativity & unity"
+  },
+  ml: {
+    title: "വാർഷിക സ്കൂൾ മാഗസിൻ 2024",
+    tagline: "വിദ്യയും സൃഷ്ടിപരതയും ഐക്യവും"
+  }
+};
+function setLang(lang){
+  title.innerText = content[lang].title;
+  tagline.innerText = content[lang].tagline;
+}
+</script>
+
+</body>
+</html>
