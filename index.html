@@ -1,31 +1,159 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>School Digital Magazine</title>
+  <title>JNV Kollam – Digital Magazine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
       margin:0;
-      background:#020617;
+      font-family: Arial, sans-serif;
+      background:#f4f7fb;
+      text-align:center;
+    }
+
+    header {
+      background:#0b3c5d;
       color:white;
-      display:flex;
+      padding:20px;
+    }
+
+    .magazine-card {
+      display:inline-block;
+      margin:30px;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .magazine-card img {
+      height:220px;
+      border-radius:10px;
+      box-shadow:0 15px 30px rgba(0,0,0,.25);
+    }
+
+    .magazine-card:hover {
+      transform:scale(1.05);
+    }
+
+    /* POPUP */
+    .overlay {
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.6);
+      display:none;
       justify-content:center;
       align-items:center;
-      height:100vh;
-      font-family:Arial;
+      z-index:999;
     }
-    a {
-      background:#0b3c5d;
-      padding:15px 35px;
-      border-radius:30px;
+
+    .popup {
+      background:#e9f1ff;
+      padding:40px;
+      border-radius:20px;
+      display:flex;
+      gap:40px;
+      align-items:center;
+      animation:pop .4s ease;
+      position:relative;
+    }
+
+    .popup img {
+      height:280px;
+      border-radius:10px;
+    }
+
+    .btn {
+      background:#2673e6;
       color:white;
+      padding:12px 30px;
+      border-radius:25px;
       text-decoration:none;
-      font-size:20px;
+      display:inline-block;
+      margin-top:15px;
+    }
+
+    .close {
+      position:absolute;
+      top:10px;
+      right:15px;
+      font-size:22px;
+      cursor:pointer;
+    }
+
+    footer {
+      margin-top:50px;
+      background:#0b3c5d;
+      color:white;
+      padding:15px;
+      font-size:14px;
+    }
+
+    footer a {
+      color:#ffcc00;
+      text-decoration:none;
+      font-weight:bold;
+      animation:pulse 2s infinite;
+    }
+
+    @keyframes pop {
+      from { transform:scale(.8); opacity:0; }
+      to { transform:scale(1); opacity:1; }
+    }
+
+    @keyframes pulse {
+      0% { opacity:1; }
+      50% { opacity:.5; }
+      100% { opacity:1; }
     }
   </style>
 </head>
 <body>
 
-<a href="magazine.html">📖 Open Digital Magazine</a>
+<header>
+  <h2>Jawahar Navodaya Vidyalaya, Kollam</h2>
+</header>
+
+<div class="magazine-card" onclick="openPopup('2026')">
+  <img src="covers/2026.jpg">
+  <p>Pratibha 2026</p>
+</div>
+
+<!-- AUDIO -->
+<audio id="openSound" src="assets/audio/open.mp3" preload="auto"></audio>
+
+<!-- POPUP -->
+<div class="overlay" id="overlay">
+  <div class="popup">
+    <div class="close" onclick="closePopup()">✖</div>
+    <img id="popupImage">
+    <div>
+      <h2 id="popupTitle"></h2>
+      <p>Annual School Magazine</p>
+      <a id="popupLink" class="btn">Open Magazine</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 JNV Kollam · Powered by
+  <a href="https://eebii.com" target="_blank">Eebii</a>
+</footer>
+
+<script>
+function openPopup(year){
+  document.getElementById("popupImage").src = `covers/${year}.jpg`;
+  document.getElementById("popupTitle").innerText = "Pratibha " + year;
+  document.getElementById("popupLink").href = `magazine.html?year=${year}`;
+  document.getElementById("overlay").style.display = "flex";
+
+  document.getElementById("openSound").currentTime = 0;
+  document.getElementById("openSound").play();
+}
+
+function closePopup(){
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
 
 </body>
 </html>
