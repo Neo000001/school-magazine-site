@@ -3,6 +3,7 @@
 <head>
   <title>Digital Magazine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
       margin:0;
@@ -12,40 +13,96 @@
       align-items:center;
       height:100vh;
     }
+
     #book {
       width:90vw;
       height:90vh;
+    }
+
+    .home-btn {
+      position:fixed;
+      top:20px;
+      left:20px;
+      background:#2673e6;
+      color:white;
+      padding:10px 20px;
+      border-radius:20px;
+      text-decoration:none;
+      z-index:1000;
+    }
+
+    .eebii {
+      position:fixed;
+      bottom:15px;
+      right:20px;
+      color:white;
+      font-size:14px;
+      animation:pulse 2s infinite;
+    }
+
+    .eebii a {
+      color:#ffcc00;
+      text-decoration:none;
+      font-weight:bold;
+    }
+
+    @keyframes pulse {
+      0% { opacity:1; }
+      50% { opacity:.5; }
+      100% { opacity:1; }
     }
   </style>
 </head>
 <body>
 
+<a href="index.html" class="home-btn">🏠 Home</a>
 <div id="book"></div>
 
-<!-- REAL FLIP ENGINE -->
+<div class="Eebii">
+  Powered by <a href="https://eebii.com" target="_blank">Eebii</a>
+</div>
+
+<!-- AUDIO -->
+<audio id="flipSound" src="assets/audio/flip.mp3" preload="auto"></audio>
+
 <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
 
 <script>
+const year = new URLSearchParams(location.search).get("year") || "2026";
+const totalPages = 100;
+const batchSize = 20;
+
+const flipSound = document.getElementById("flipSound");
+
+const pages = [];
+for (let i = 1; i <= totalPages; i++) {
+  pages.push(`pages/${year}/page-${i}.jpg`);
+}
+
+let loaded = pages.slice(0, batchSize);
+
 const pageFlip = new St.PageFlip(
   document.getElementById("book"),
   {
-    width: 600,
-    height: 800,
-    size: "stretch",
-    showCover: true,
-    maxShadowOpacity: 0.6,
-    mobileScrollSupport: true
+    width:600,
+    height:800,
+    size:"stretch",
+    showCover:true,
+    mobileScrollSupport:true
   }
 );
 
-pageFlip.loadFromImages([
-  "pages/page1.jpg",
-  "pages/page2.jpg",
-  "pages/page3.jpg",
-  "pages/page4.jpg",
-  "pages/page5.jpg"
-  // keep adding till last page
-]);
+pageFlip.loadFromImages(loaded);
+
+pageFlip.on("flip", (e) => {
+  flipSound.currentTime = 0;
+  flipSound.play();
+
+  if (e.data > loaded.length - 10 && loaded.length < pages.length) {
+    loaded = pages.slice(0, loaded.length + batchSize);
+    pageFlip.loadFromImages(loaded);
+  }
+});
 </script>
 
 </body>
